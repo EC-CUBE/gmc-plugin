@@ -29,15 +29,18 @@ class PluginManager extends AbstractPluginManager
     {
         /** @var ClientManagerInterface $clientManager */
         $clientManager = $container->get(ClientManagerInterface::class);
-        $Client = new Client('eccube_gmc_client', hash('sha512', random_bytes(32)));
-        $Client->setScopes(
-            new Scope('read'),
-            new Scope('write'));
-        $Client->setGrants(
-            new Grant(OAuth2Grants::AUTHORIZATION_CODE),
-            new Grant(OAuth2Grants::REFRESH_TOKEN));
-        $Client->setRedirectUris(new RedirectUri(env('GMC_PROXY_URL', 'https://gmc-proxy.ec-cube.net').'/eccube/callback'));
-        $clientManager->save($Client);
+
+        if ($clientManager->find('eccube_gmc_client') === null) {
+            $Client = new Client('eccube_gmc_client', hash('sha512', random_bytes(32)));
+            $Client->setScopes(
+                new Scope('read'),
+                new Scope('write'));
+            $Client->setGrants(
+                new Grant(OAuth2Grants::AUTHORIZATION_CODE),
+                new Grant(OAuth2Grants::REFRESH_TOKEN));
+            $Client->setRedirectUris(new RedirectUri(env('GMC_PROXY_URL', 'https://gmc-proxy.ec-cube.net').'/eccube/callback'));
+            $clientManager->save($Client);
+        }
 
         /** @var EccubeConfig $eccubeConfig */
         $eccubeConfig = $container->get(EccubeConfig::class);
