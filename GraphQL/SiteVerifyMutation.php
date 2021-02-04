@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of EC-CUBE
  *
@@ -11,7 +12,6 @@
  */
 
 namespace Plugin\GMC\GraphQL;
-
 
 use Eccube\Common\EccubeConfig;
 use GraphQL\Type\Definition\Type;
@@ -40,10 +40,10 @@ class SiteVerifyMutation implements Mutation
             'type' => Type::string(),
             'args' => [
                 'token' => [
-                    'type' => Type::nonNull(Type::string())
-                ]
+                    'type' => Type::nonNull(Type::string()),
+                ],
             ],
-            'resolve' => [$this, 'saveToken']
+            'resolve' => [$this, 'saveToken'],
         ];
     }
 
@@ -51,10 +51,11 @@ class SiteVerifyMutation implements Mutation
     {
         $fileName = $args['token'];
         $content = 'google-site-verification: '.$fileName;
-        file_put_contents($this->eccubeConfig['plugin_data_realdir']."/GMC/".$fileName, $content);
-        if (is_dir($this->eccubeConfig['plugin_data_realdir']."/SiteKit")) {
-            file_put_contents($this->eccubeConfig['plugin_data_realdir']."/SiteKit/google-site-verification.txt", $content);
+        file_put_contents($this->eccubeConfig['plugin_data_realdir'].'/GMC/'.$fileName, $content);
+        if (is_dir($this->eccubeConfig['plugin_data_realdir'].'/SiteKit')) {
+            file_put_contents($this->eccubeConfig['plugin_data_realdir'].'/SiteKit/google-site-verification.txt', $content);
         }
+
         return $content;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of EC-CUBE
  *
@@ -11,7 +12,6 @@
  */
 
 namespace Plugin\GMC\Controller;
-
 
 use Eccube\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;

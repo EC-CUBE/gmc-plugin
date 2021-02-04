@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of EC-CUBE
  *
@@ -11,7 +12,6 @@
  */
 
 namespace Plugin\GMC\GraphQL;
-
 
 use Doctrine\ORM\EntityManager;
 use Eccube\Common\EccubeConfig;
@@ -39,7 +39,6 @@ class WebHookMutation implements Mutation
 
     /**
      * WebHookMutation constructor.
-     * @param WebHookRepository $webHookRepository
      */
     public function __construct(WebHookRepository $webHookRepository, EntityManager $entityManager, EccubeConfig $eccubeConfig)
     {
@@ -59,16 +58,16 @@ class WebHookMutation implements Mutation
             'type' => Type::string(),
             'args' => [
                 'secret' => [
-                    'type' => Type::nonNull(Type::string())
-                ]
+                    'type' => Type::nonNull(Type::string()),
+                ],
             ],
-            'resolve' => [$this, 'saveWebHook']
+            'resolve' => [$this, 'saveWebHook'],
         ];
     }
 
     public function saveWebHook($root, $args)
     {
-        $payloadUrl = env('GMC_PROXY_URL', $this->eccubeConfig['gmc_proxy_url']) . '/eccube/webhook';
+        $payloadUrl = env('GMC_PROXY_URL', $this->eccubeConfig['gmc_proxy_url']).'/eccube/webhook';
         $WebHook = $this->webHookRepository->findOneBy(['payloadUrl' => $payloadUrl]);
         if (!$WebHook) {
             $WebHook = new WebHook();

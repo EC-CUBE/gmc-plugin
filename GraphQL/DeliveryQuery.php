@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of EC-CUBE
  *
@@ -11,7 +12,6 @@
  */
 
 namespace Plugin\GMC\GraphQL;
-
 
 use Eccube\Entity\Delivery;
 use Eccube\Repository\DeliveryRepository;
@@ -33,8 +33,6 @@ class DeliveryQuery implements Query
 
     /**
      * DeliveryQuery constructor.
-     * @param Types $types
-     * @param DeliveryRepository $deliveryRepository
      */
     public function __construct(Types $types, DeliveryRepository $deliveryRepository)
     {

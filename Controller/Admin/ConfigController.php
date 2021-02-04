@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of EC-CUBE
+ *
+ * Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+ *
+ * http://www.ec-cube.co.jp/
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Plugin\GMC\Controller\Admin;
 
 use Eccube\Controller\AbstractController;
@@ -20,7 +31,7 @@ class ConfigController extends AbstractController
 
         return [
             'form' => $form->createView(),
-            'gmc_proxy_url' => env('GMC_PROXY_URL', $this->eccubeConfig['gmc_proxy_url'])
+            'gmc_proxy_url' => env('GMC_PROXY_URL', $this->eccubeConfig['gmc_proxy_url']),
         ];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of EC-CUBE
  *
@@ -11,7 +12,6 @@
  */
 
 namespace Plugin\GMC;
-
 
 use Eccube\Common\EccubeConfig;
 use Eccube\Plugin\AbstractPluginManager;
@@ -44,6 +44,6 @@ class PluginManager extends AbstractPluginManager
 
         /** @var EccubeConfig $eccubeConfig */
         $eccubeConfig = $container->get(EccubeConfig::class);
-        @mkdir($eccubeConfig->get('plugin_data_realdir') . '/GMC');
+        @mkdir($eccubeConfig->get('plugin_data_realdir').'/GMC');
     }
 }
