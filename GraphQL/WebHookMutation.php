@@ -13,7 +13,7 @@
 
 namespace Plugin\GMC\GraphQL;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Eccube\Common\EccubeConfig;
 use GraphQL\Type\Definition\Type;
 use Plugin\Api\Entity\WebHook;
@@ -28,7 +28,7 @@ class WebHookMutation implements Mutation
     private $webHookRepository;
 
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $entityManager;
 
@@ -40,7 +40,7 @@ class WebHookMutation implements Mutation
     /**
      * WebHookMutation constructor.
      */
-    public function __construct(WebHookRepository $webHookRepository, EntityManager $entityManager, EccubeConfig $eccubeConfig)
+    public function __construct(WebHookRepository $webHookRepository, EntityManagerInterface $entityManager, EccubeConfig $eccubeConfig)
     {
         $this->webHookRepository = $webHookRepository;
         $this->entityManager = $entityManager;
