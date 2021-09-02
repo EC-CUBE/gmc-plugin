@@ -1,11 +1,11 @@
 {
   "name": "ec-cube/GMC",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "description": "Google Merchant Center",
   "type": "eccube-plugin",
   "require": {
     "ec-cube/plugin-installer": "~0.0.7",
-    "ec-cube/Api": "~1.0"
+    "ec-cube/Api": "~2.1"
   },
   "extra": {
     "code": "GMC"
