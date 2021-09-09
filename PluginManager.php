@@ -16,6 +16,7 @@ namespace Plugin\GMC;
 use Eccube\Common\EccubeConfig;
 use Eccube\Plugin\AbstractPluginManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Trikoder\Bundle\OAuth2Bundle\Manager\ClientManagerInterface;
 use Trikoder\Bundle\OAuth2Bundle\Model\Client;
 use Trikoder\Bundle\OAuth2Bundle\Model\Grant;
@@ -45,5 +46,20 @@ class PluginManager extends AbstractPluginManager
         /** @var EccubeConfig $eccubeConfig */
         $eccubeConfig = $container->get(EccubeConfig::class);
         @mkdir($eccubeConfig->get('plugin_data_realdir').'/GMC');
+
+        $fs = new Filesystem();
+        $routeYaml = $container->getParameter('plugin_data_realdir').'/GMC/routes.yaml';
+        if (!$fs->exists($routeYaml)) {
+            $fs->dumpFile($routeYaml, '');
+        }
+    }
+
+    public function update(array $meta, ContainerInterface $container)
+    {
+        $fs = new Filesystem();
+        $routeYaml = $container->getParameter('plugin_data_realdir').'/GMC/routes.yaml';
+        if (!$fs->exists($routeYaml)) {
+            $fs->dumpFile($routeYaml, '');
+        }
     }
 }

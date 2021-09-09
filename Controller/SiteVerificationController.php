@@ -20,12 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SiteVerificationController extends AbstractController
 {
-    /**
-     * @Route("/google{code}.html", name="gmc_site_verification")
-     */
-    public function verifyUrl(string $code)
+    public function verifyUrl()
     {
-        $verificationFile = $this->eccubeConfig['plugin_data_realdir']."/GMC/google${code}.html";
+        $verificationFile = $this->eccubeConfig['plugin_data_realdir']."/GMC/google-site-verification.txt";
         if (file_exists($verificationFile)) {
             return new BinaryFileResponse($verificationFile);
         }

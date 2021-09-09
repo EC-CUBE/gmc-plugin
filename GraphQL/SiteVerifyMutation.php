@@ -16,6 +16,8 @@ namespace Plugin\GMC\GraphQL;
 use Eccube\Common\EccubeConfig;
 use GraphQL\Type\Definition\Type;
 use Plugin\Api\GraphQL\Mutation;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Yaml\Yaml;
 
 class SiteVerifyMutation implements Mutation
 {
@@ -49,13 +51,41 @@ class SiteVerifyMutation implements Mutation
 
     public function saveToken($root, $args)
     {
-        $fileName = $args['token'];
-        $content = 'google-site-verification: '.$fileName;
-        file_put_contents($this->eccubeConfig['plugin_data_realdir'].'/GMC/'.$fileName, $content);
-        if (is_dir($this->eccubeConfig['plugin_data_realdir'].'/SiteKit')) {
-            file_put_contents($this->eccubeConfig['plugin_data_realdir'].'/SiteKit/google-site-verification.txt', $content);
-        }
+        $content = 'google-site-verification: '.$args['token'];
+
+        $fs = new Filesystem();
+        $fs->dumpFile(
+            $this->eccubeConfig['plugin_data_realdir'].'/GMC/google-site-verification.txt',
+            $content
+        );
+
+        $yaml = Yaml::dump([
+            'gmc_site_verification' => [
+                'path' => '/'.$args['token'],
+                'controller' => 'Plugin\GMC\Controller\SiteVerificationController::verifyUrl',
+            ]
+        ]);
+        $fs->dumpFile(
+            $this->eccubeConfig['plugin_data_realdir'].'/GMC/routes.yaml',
+            $yaml);
+
+        // キャッシュを全削除すると後続のAPI通信でシステムエラーが発生するため、ルーティングのみクリアする
+        $this->clearRouting();
 
         return $content;
+    }
+
+    private function clearRouting()
+    {
+        if (env('APP_ENV') === 'prod') {
+            $cacheDir = $this->eccubeConfig->get('kernel.cache_dir');
+            $fs = new Filesystem();
+            $fs->remove([
+                $cacheDir.'/EccubeProdProjectContainerUrlGenerator.php',
+                $cacheDir.'/EccubeProdProjectContainerUrlGenerator.php.meta',
+                $cacheDir.'/EccubeProdProjectContainerUrlMatcher.php',
+                $cacheDir.'/EccubeProdProjectContainerUrlMatcher.php.meta',
+            ]);
+        }
     }
 }
