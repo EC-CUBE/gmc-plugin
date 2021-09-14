@@ -81,6 +81,12 @@ class SiteVerifyMutation implements Mutation
             $cacheDir = $this->eccubeConfig->get('kernel.cache_dir');
             $fs = new Filesystem();
             $fs->remove([
+                // 4.1
+                $cacheDir.'/UrlGenerator.php',
+                $cacheDir.'/UrlGenerator.php.meta',
+                $cacheDir.'/UrlMatcher.php',
+                $cacheDir.'/UrlMatcher.php.meta',
+                // 4.0
                 $cacheDir.'/EccubeProdProjectContainerUrlGenerator.php',
                 $cacheDir.'/EccubeProdProjectContainerUrlGenerator.php.meta',
                 $cacheDir.'/EccubeProdProjectContainerUrlMatcher.php',
