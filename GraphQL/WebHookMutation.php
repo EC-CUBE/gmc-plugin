@@ -16,9 +16,9 @@ namespace Plugin\GMC\GraphQL;
 use Doctrine\ORM\EntityManagerInterface;
 use Eccube\Common\EccubeConfig;
 use GraphQL\Type\Definition\Type;
-use Plugin\Api\Entity\WebHook;
-use Plugin\Api\GraphQL\Mutation;
-use Plugin\Api\Repository\WebHookRepository;
+use Plugin\Api42\Entity\WebHook;
+use Plugin\Api42\GraphQL\Mutation;
+use Plugin\Api42\Repository\WebHookRepository;
 
 class WebHookMutation implements Mutation
 {

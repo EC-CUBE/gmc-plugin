@@ -16,8 +16,8 @@ namespace Plugin\GMC\GraphQL;
 use Eccube\Entity\Delivery;
 use Eccube\Repository\DeliveryRepository;
 use GraphQL\Type\Definition\Type;
-use Plugin\Api\GraphQL\Query;
-use Plugin\Api\GraphQL\Types;
+use Plugin\Api42\GraphQL\Query;
+use Plugin\Api42\GraphQL\Types;
 
 class DeliveryQuery implements Query
 {
