@@ -15,7 +15,7 @@ namespace Plugin\GMC\GraphQL;
 
 use Eccube\Common\EccubeConfig;
 use GraphQL\Type\Definition\Type;
-use Plugin\Api\GraphQL\Mutation;
+use Plugin\Api42\GraphQL\Mutation;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 

@@ -25,7 +25,7 @@ class SiteVerifyMutationTest extends EccubeTestCase
     private $routeFile;
     private $fs;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -37,7 +37,7 @@ class SiteVerifyMutationTest extends EccubeTestCase
         $this->fs->dumpFile($this->routeFile, '');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->fs->remove($this->verificationFile);
         $this->fs->dumpFile($this->routeFile, '');
